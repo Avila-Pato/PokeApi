@@ -136,12 +136,19 @@ main {
     padding-inline: 1rem;
     display: flex;
     justify-content: center;
+    text-align: center;
+    
+    
 }
 
-.pokemon-imagen img {
-    width: 100%;
-    max-width: 6rem;
+.pokemon-image img {
+    width: 150px;
+    height: auto;
+    margin-left: auto; /* Margen izquierdo automático */
+    margin-right: auto; /* Margen derecho automático */
+    display: block; /* Asegura que la imagen sea un bloque para aplicar márgenes automáticos */
 }
+
 
 .pokemon-info {
     display: flex;

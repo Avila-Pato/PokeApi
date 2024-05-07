@@ -2,14 +2,13 @@ const listaPokemon = document.querySelector("#listaPokemon");
 const botonesHeader = document.querySelectorAll(".btn-header");
 let URL =  "https://pokeapi.co/api/v2/pokemon/";
 
-for  (let i = 1; 1 <= 151; i++) {
+for (let i = 1; i <= 151; i++) {
     fetch(URL + i)
         .then((response) =>  response.json())
         .then(data => mostrarPokemon(data))  
 }
 
 function mostrarPokemon(poke) {
-
     let tipos = poke.types.map((type ) => `<p class="tipo ${type.type.name} tipo">${type.type.name}</p>` );
     tipos = tipos.join(' ');
 
@@ -20,29 +19,29 @@ function mostrarPokemon(poke) {
         pokeId = "0" + pokeId;
     }
 
-     const div = document.createElement("div");
-     div.classList.add("pokemon");
-     div.innerHTML = `
-     <div class="pokemon">
-                    <p class="pokemon-id-back">#${pokeId}</p>
-                    <div class="pokemon-image">
-                        <img src="${poke.sprite.other["official-artwork"].front_default}" alt="${poke.name}">
-                    </div>
-                    <div class="pokemon-info">
-                        <div class="nombre-contenedor">
-                            <p class="pokemon-id">#${pokeId}</p>
-                            <h2 class="pokemon-nombre">${poke.name}</h2>
-                        </div>
-                        <div class="pokemon-tipos">
-                            ${tipos}
-                        </div>
-                        <div class="pokemon-stats">
-                            <p class="stat">${poke.height}</p>
-                            <p class="stat">${poke.weight}kg</p>
-                        </div>
-                    </div>
-                </div>`;
-                listaPokemon.append(div);
+    const div = document.createElement("div");
+    div.classList.add("pokemon");
+    div.innerHTML = `
+        <div class="pokemon">
+            <p class="pokemon-id-back">#${pokeId}</p>
+            <div class="pokemon-image">
+                <img src="${poke.sprites.other["official-artwork"].front_default}" alt="${poke.name}">
+            </div>
+            <div class="pokemon-info">
+                <div class="nombre-contenedor">
+                    <p class="pokemon-id">#${pokeId}</p>
+                    <h2 class="pokemon-nombre">${poke.name}</h2>
+                </div>
+                <div class="pokemon-tipos">
+                    ${tipos}
+                </div>
+                <div class="pokemon-stats">
+                    <p class="stat">${poke.height}</p>
+                    <p class="stat">${poke.weight}kg</p>
+                </div>
+            </div>
+        </div>`;
+    listaPokemon.append(div);
 }
 
 botonesHeader.forEach(boton => boton.addEventListener("click",(event) => {
@@ -50,19 +49,18 @@ botonesHeader.forEach(boton => boton.addEventListener("click",(event) => {
 
     listaPokemon.innerHTML = "";
     
-for  (let i = i; i <= 151; i++) {
-    fetch(URL + i)
-        .then((response) =>  response.json())
-        .then(data => {  
-
-            if(botonId === "ver-todos") {
-                mostrarPokemon(data);
-            } else { 
-            const tipos = data.types.map(type => type.type.name);
-            if (tipos.some(tipo => tipo.includes(botonId))) {
-                mostrarPokemon(data);
-            }
-        }
-    })
-}
-}))
+    for (let i = 1; i <= 151; i++) {
+        fetch(URL + i)
+            .then((response) =>  response.json())
+            .then(data => {  
+                if(botonId === "ver-todos") {
+                    mostrarPokemon(data);
+                } else { 
+                    const tipos = data.types.map(type => type.type.name);
+                    if (tipos.some(tipo => tipo.includes(botonId))) {
+                        mostrarPokemon(data);
+                    }
+                }
+            })
+    }
+}));
