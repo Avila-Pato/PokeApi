@@ -50,7 +50,7 @@ botonesHeader.forEach(boton => boton.addEventListener("click",(event) => {
 
     listaPokemon.innerHTML = "";
     
-for  (let i = 1; 1 <= 151; i++) {
+for  (let i = i; i <= 151; i++) {
     fetch(URL + i)
         .then((response) =>  response.json())
         .then(data => {  
